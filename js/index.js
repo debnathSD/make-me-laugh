@@ -1,8 +1,10 @@
-import { API_ENDPOINT } from "../constants";
+const API_ENDPOINT = "https://icanhazdadjoke.com/";
+
+const jokesContainer = document.getElementById("jokes");
 
 const getJoke = () => {
     const myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Accept", "text/plain");
     
     const requestOptions = {
       method: 'GET',
@@ -12,6 +14,8 @@ const getJoke = () => {
     
     fetch(API_ENDPOINT, requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        jokesContainer.innerHTML = `<span class="jokes-span">${result}</span>`;
+      })
       .catch(error => console.log('error', error));
 };
